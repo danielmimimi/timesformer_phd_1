@@ -1,0 +1,174 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: Current File with Arguments",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "quick_renamer.py",
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Python Debugger: Current File with Arguments",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "tools/run_net.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--cfg",
+                "/workspaces/TimeSFormer/configs/hslu/TimeSformer_divST_8_224_gen1.yaml"
+            ]
+        },
+        {
+            "name": "Gen2 Training",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "tools/run_net.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--cfg",
+                "/workspaces/TimeSFormer/configs/hslu/TimeSformer_divST_8_224_gen2.yaml"
+            ]
+        },
+        {
+            "name": "Gen2 Training One Step",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "tools/run_net.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--cfg",
+                "/workspaces/TimeSFormer/configs/hslu/TimeSformer_divST_8_224_gen2_one_step.yaml"
+            ]
+        },
+        {
+            "name": "Gen2 Training half Step",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "tools/run_net.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--cfg",
+                "/workspaces/TimeSFormer/configs/hslu/TimeSformer_divST_8_224_gen2_half_step.yaml"
+            ]
+        },
+        {
+            "name": "Gen2 Training half Step with freezed layers",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "tools/run_net.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--cfg",
+                "/workspaces/TimeSFormer/configs/hslu/TimeSformer_divST_8_224_gen2_half_step_freezed.yaml"
+            ]
+        },
+        {
+            "name": "Attention Rollout",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout.py",
+            "console": "integratedTerminal",
+            "args": []
+        },
+        {
+            "name": "Attention Rollout Gen 2",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen2.py",
+            "console": "integratedTerminal",
+            "args": []
+        },
+        {
+            "name": "Attention Rollout Gen 2.1",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen2_1.py",
+            "console": "integratedTerminal",
+            "args": []
+        },
+        {
+            "name": "Attention Rollout Gen 2.1r",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen2_1r.py",
+            "console": "integratedTerminal",
+            "args": []
+        },
+        {
+            "name": "Attention Rollout Gen 2.2r",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen2_2r.py",
+            "console": "integratedTerminal",
+            "args": []
+        },
+        {
+            "name": "Attention Rollout Gen K600",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_k600.py",
+            "console": "integratedTerminal",
+            "args": []
+        },
+        {
+            "name": "Preprocessing K600",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "/workspaces/TimeSFormer/timesformer/datasets/kinetics-dataset/preprocessing_script.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--src_dir",
+                "/workspaces/TimeSFormer/timesformer/datasets/k600/test",
+                "--out_dir",
+                "/workspaces/TimeSFormer/timesformer/datasets/k600/unpacked",
+                "--csv_dir",
+                "/workspaces/TimeSFormer/timesformer/datasets/k600/annotations/test.csv"
+            ]
+        },
+        {
+            "name": "Attention Rollout Rolling Gen 3",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen3.py",
+            "console": "integratedTerminal",
+            "args": []
+        },
+        {
+            "name": "Attention Rollout Multiperson Rolling Gen 3",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen3.1.py",
+            "console": "integratedTerminal",
+            "args": []
+        },
+        {
+            "name": "Attention Rollout Multiperson Rolling Gen 32",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen3.2.py",
+            "console": "integratedTerminal",
+            "args": []
+        },
+        {
+            "name": "Eval Script",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen_script.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--checkpoint_file",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_epoch_00040_gen2_half_step.pyth",
+                "--model_description",
+                "SPREAD_HS_HS",
+                "--configs",
+                "/workspaces/TimeSFormer/configs/hslu/TimeSformer_divST_8_224_spread_half_step.yaml",
+                "--min_amount_of_data",
+                "40"
+            ]
+        },
+    ]
+}

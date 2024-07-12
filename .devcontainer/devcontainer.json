@@ -1,0 +1,55 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+	"name": "TimeSFormerNe",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python@2024.6.0",
+				"ms-toolsai.jupyter",
+				"076923.python-image-preview"
+			],
+			"settings": {
+				"python.testing.pytestArgs": [
+					"."
+				],
+				"python.testing.unittestEnabled": false,
+				"python.testing.pytestEnabled": true,
+				"python.formatting.provider": "black",
+				"python.linting.mypyEnabled": true,
+				"python.linting.enabled": true
+			}
+		}
+	},
+	"runArgs": [
+		"--gpus",
+		"all",
+		"--shm-size",
+		"50G"
+	],
+	"mounts": [
+		"source=C:/project/trials/datasets/hslu,target=/workspaces/TimeSFormer/timesformer/datasets/hslu,type=bind,consistency=cached",
+		"source=H:/blender_generated/phd/generated,target=/workspaces/TimeSFormer/timesformer/datasets/hslu/gen1,type=bind,consistency=cached",
+		"source=H:/blender_generated/phd/gen2,target=/workspaces/TimeSFormer/timesformer/datasets/hslu/gen2,type=bind,consistency=cached",
+		"source=H:/data/dataset,target=/workspaces/TimeSFormer/timesformer/datasets/hslu/gen2r,type=bind,consistency=cached",
+		"source=H:/data/multiperson_dataset,target=/workspaces/TimeSFormer/timesformer/datasets/hslu/gen4,type=bind,consistency=cached",
+		"source=H:/k600,target=/workspaces/TimeSFormer/timesformer/datasets/k600,type=bind,consistency=cached",
+		"source=H:/data/Spread,target=/workspaces/TimeSFormer/timesformer/datasets/spread,type=bind,consistency=cached"
+	]
+	// "forwardPorts": [
+	// 	6006,
+	// 	8008
+	// ],
+	// "portsAttributes": {
+	// 	"6006": {
+	// 		"visibility": "public"
+	// 	},
+	// 	"8008": {
+	// 		"visibility": "public"
+	// 	}
+	// }
+}
