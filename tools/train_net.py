@@ -26,6 +26,7 @@ from timm.loss import LabelSmoothingCrossEntropy, SoftTargetCrossEntropy
 
 logger = logging.get_logger(__name__)
 
+best_median_top1_error = float('inf')
 
 def train_epoch(
     train_loader, model, optimizer, train_meter, cur_epoch, cfg, writer=None
@@ -46,14 +47,6 @@ def train_epoch(
     """
     # Enable train mode.
     model.train()
-
-    if len(cfg.TRAIN.FREEZE_LAYERS) > 0:
-        for name, param in model.named_parameters():
-            if any(freeze_layer in name for freeze_layer in cfg.TRAIN.FREEZE_LAYERS):
-                param.requires_grad = False
-
-    for name, param in model.named_parameters():
-        print(f"Layer: {name}, requires_grad: {param.requires_grad}")
 
     train_meter.iter_tic()
     data_size = len(train_loader)
@@ -148,7 +141,7 @@ def train_epoch(
                 loss = loss.item()
             else:
                 # Compute the errors.
-                num_topks_correct = metrics.topks_correct(preds, labels, (1, 3))
+                num_topks_correct = metrics.topks_correct(preds, labels, (1, 2))
                 top1_err, top5_err = [
                     (1.0 - x / preds.size(0)) * 100.0 for x in num_topks_correct
                 ]
@@ -269,7 +262,7 @@ def eval_epoch(val_loader, model, val_meter, cur_epoch, cfg, writer=None):
                         preds, labels = du.all_gather([preds, labels])
                 else:
                     # Compute the errors.
-                    num_topks_correct = metrics.topks_correct(preds, labels, (1, 3))
+                    num_topks_correct = metrics.topks_correct(preds, labels, (1, 2))
 
                     # Combine the errors across the GPUs.
                     top1_err, top5_err = [
@@ -323,7 +316,9 @@ def eval_epoch(val_loader, model, val_meter, cur_epoch, cfg, writer=None):
                 preds=all_preds, labels=all_labels, global_step=cur_epoch
             )
 
+    value_to_return = val_meter.get_stats()
     val_meter.reset()
+    return value_to_return
 
 
 def calculate_and_update_precise_bn(loader, model, num_iters=200, use_gpu=True):
@@ -426,6 +421,17 @@ def train(cfg):
 
     # Build the video model and print model statistics.
     model = build_model(cfg)
+
+    # FREEZE LAYERS HSLU
+    if len(cfg.TRAIN.FREEZE_LAYERS) > 0:
+        for name, param in model.named_parameters():
+            if any(freeze_layer in name for freeze_layer in cfg.TRAIN.FREEZE_LAYERS):
+                param.requires_grad = False
+
+    for name, param in model.named_parameters():
+        print(f"Layer: {name}, requires_grad: {param.requires_grad}")
+
+
     if du.is_master_proc() and cfg.LOG_MODEL_INFO:
         misc.log_model_info(model, cfg, use_train_input=True)
 
@@ -519,12 +525,20 @@ def train(cfg):
             )
         _ = misc.aggregate_sub_bn_stats(model)
 
-        # Save a checkpoint.
-        if is_checkp_epoch:
-            cu.save_checkpoint(cfg.OUTPUT_DIR, model, optimizer, cur_epoch, cfg)
+
         # Evaluate the model on validation set.
         if is_eval_epoch:
-            eval_epoch(val_loader, model, val_meter, cur_epoch, cfg, writer)
+            median_top1_error = eval_epoch(val_loader, model, val_meter, cur_epoch, cfg, writer)
+
+        # Save a checkpoint.
+        if is_checkp_epoch:
+            # SAVE SOMEHOW AND ONLY SAVE WHILE BETTER!
+            global best_median_top1_error
+            # median_top1_error = val_meter.get_stats()
+            if val_meter.min_top1_err < best_median_top1_error:
+                best_median_top1_error = val_meter.min_top1_err
+                cu.save_checkpoint(cfg.OUTPUT_DIR, model, optimizer, cur_epoch, cfg,val_meter.min_top1_err)
+            
 
     if writer is not None:
         writer.close()

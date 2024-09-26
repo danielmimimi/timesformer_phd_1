@@ -1,13 +1,14 @@
 TRAIN:
   ENABLE: True
   DATASET: hslu
-  BATCH_SIZE: 5
-  EVAL_PERIOD: 5
-  CHECKPOINT_PERIOD: 10
+  BATCH_SIZE: 16
+  EVAL_PERIOD: 3
+  CHECKPOINT_PERIOD: 3
   AUTO_RESUME: False
   CHECKPOINT_FILE_PATH: "/workspaces/TimeSFormer/Startpoints/TimeSformer_divST_8x32_224_K600.pyth"
   FINETUNE: True
-  FREEZE_LAYERS: ["blocks.0.",blocks.1.]
+  FREEZE_LAYERS: ["model.cls_token","model.pos_embed","model.time_embed","model.patch_embed","blocks.0.",blocks.1.,"blocks.2.",blocks.3.,"blocks.4.",blocks.5.,"blocks.6.",blocks.7.,"blocks.8.",blocks.9.,"blocks.10."]
+  SPECIFIC_NAME: "10_blocks_frozen"
 DATA:
   PATH_TO_DATA_DIR: "/workspaces/TimeSFormer/timesformer/datasets/hslu/gen2"
   PATH_PREFIX: "/workspaces/TimeSFormer/timesformer/datasets/hslu/gen2"
@@ -28,7 +29,7 @@ SOLVER:
   LR_POLICY: steps_with_relative_lrs
   STEPS: [0, 200, 500,800]
   LRS: [1, 0.8, 0.5,0.8]
-  MAX_EPOCH: 80
+  MAX_EPOCH: 100
   MOMENTUM: 0.9
   WEIGHT_DECAY: 1e-4
   OPTIMIZING_METHOD: sgd

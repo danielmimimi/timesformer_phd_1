@@ -230,6 +230,8 @@ class ScalarMeter(object):
         """
         Calculate the current median value of the deque.
         """
+        if len(self.deque) == 0:
+            return np.inf
         return np.median(self.deque)
 
     def get_win_avg(self):
@@ -474,6 +476,9 @@ class ValMeter(object):
     def data_toc(self):
         self.data_timer.pause()
         self.net_timer.reset()
+
+    def get_stats(self):
+        return self.mb_top1_err.get_win_median()
 
     def update_stats(self, top1_err, top5_err, mb_size, stats={}):
         """

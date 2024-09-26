@@ -56,14 +56,14 @@
             ]
         },
         {
-            "name": "Gen2 Training half Step with freezed layers",
+            "name": "Gen2 Training half Step with 3 freezed layers",
             "type": "debugpy",
             "request": "launch",
             "program": "tools/run_net.py",
             "console": "integratedTerminal",
             "args": [
                 "--cfg",
-                "/workspaces/TimeSFormer/configs/hslu/TimeSformer_divST_8_224_gen2_half_step_freezed.yaml"
+                "/workspaces/TimeSFormer/configs/hslu/TimeSformer_divST_8_224_gen2_half_step_freezed_03.yaml"
             ]
         },
         {
@@ -168,6 +168,257 @@
                 "/workspaces/TimeSFormer/configs/hslu/TimeSformer_divST_8_224_spread_half_step.yaml",
                 "--min_amount_of_data",
                 "40"
+            ]
+        },
+        {
+            "name": "Attention Rollout Multiperson Rolling Gen 33",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen3.3.py",
+            "console": "integratedTerminal",
+            "args": []
+        },
+        {
+            "name": "Get Attention Rollout Script New",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen_script_2.py",
+            "console": "integratedTerminal",
+            "args": [
+                "-cp",
+                "/workspaces/TimeSFormer/Startpoints/TimeSformer_divST_8x32_224_K600.pyth",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_epoch_00040_gen2_half_step.pyth",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_3_blocks_frozen_val_3.8461538461538463_epoch_00015.pyth",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_6_blocks_frozen_val_4.326923076923077_epoch_00033.pyth",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_9_blocks_frozen_val_4.086538461538462_epoch_00096.pyth",
+                "-t",
+                "Original",
+                "0Frozen",
+                "3BocksFrozen",
+                "6BocksFrozen",
+                "9BocksFrozen",
+                "-c",
+                "/workspaces/TimeSFormer/configs/hslu/TimeSformer_divST_8_224_gen2_half_step.yaml",
+                "-s",
+                "half_step",
+                "-p",
+                "/workspaces/TimeSFormer/timesformer/datasets/hslu/gen2",
+                "-m",
+                "50",
+                "--output_path",
+                "/workspaces/TimeSFormer/frozen_evals"
+            ]
+        },
+        {
+            "name": "Get Attention Rollout Script New Original Images",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen_script_2.py",
+            "console": "integratedTerminal",
+            "args": [
+                "-cp",
+                "/workspaces/TimeSFormer/Startpoints/TimeSformer_divST_8x32_224_K600.pyth",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_epoch_00040_gen2_half_step.pyth",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_3_blocks_frozen_val_3.8461538461538463_epoch_00015.pyth",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_6_blocks_frozen_val_4.326923076923077_epoch_00033.pyth",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_9_blocks_frozen_val_4.086538461538462_epoch_00096.pyth",
+                "-t",
+                "Original",
+                "0Frozen",
+                "3BocksFrozen",
+                "6BocksFrozen",
+                "9BocksFrozen",
+                "-c",
+                "/workspaces/TimeSFormer/configs/hslu/TimeSformer_divST_8_224_gen2_half_step.yaml",
+                "-s",
+                "half_step",
+                "-p",
+                "/workspaces/TimeSFormer/timesformer/datasets/k600_human_only",
+                "-m",
+                "11",
+                "--output_path",
+                "/workspaces/TimeSFormer/frozen_evals_k600"
+            ]
+        },
+        {
+            "name": "Get Attention Rollout Script Spread",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen_script_2.py",
+            "console": "integratedTerminal",
+            "args": [
+                "-cp",
+                "/workspaces/TimeSFormer/Startpoints/TimeSformer_divST_8x32_224_K600.pyth",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_epoch_00040_gen2_half_step.pyth",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_3_blocks_frozen_val_3.8461538461538463_epoch_00015.pyth",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_6_blocks_frozen_val_4.326923076923077_epoch_00033.pyth",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_9_blocks_frozen_val_4.086538461538462_epoch_00096.pyth",
+                "-t",
+                "Original",
+                "0Frozen",
+                "3BocksFrozen",
+                "6BocksFrozen",
+                "9BocksFrozen",
+                "-c",
+                "/workspaces/TimeSFormer/configs/hslu/TimeSformer_divST_8_224_gen2_half_step.yaml",
+                "-s",
+                "half_step",
+                "-p",
+                "/workspaces/TimeSFormer/timesformer/datasets/spread",
+                "-m",
+                "11",
+                "--output_path",
+                "/workspaces/TimeSFormer/frozen_evals_spread"
+            ]
+        },
+        {
+            "name": "Get Attention Rollout Script Gen2r",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen_script_2.py",
+            "console": "integratedTerminal",
+            "args": [
+                "-cp",
+                "/workspaces/TimeSFormer/Startpoints/TimeSformer_divST_8x32_224_K600.pyth",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_epoch_00040_gen2_half_step.pyth",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_3_blocks_frozen_val_3.8461538461538463_epoch_00015.pyth",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_6_blocks_frozen_val_4.326923076923077_epoch_00033.pyth",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_9_blocks_frozen_val_4.086538461538462_epoch_00096.pyth",
+                "-t",
+                "Original",
+                "0Frozen",
+                "3BocksFrozen",
+                "6BocksFrozen",
+                "9BocksFrozen",
+                "-c",
+                "/workspaces/TimeSFormer/configs/hslu/TimeSformer_divST_8_224_gen2_half_step.yaml",
+                "-s",
+                "half_step",
+                "-p",
+                "/workspaces/TimeSFormer/timesformer/datasets/hslu/gen2r",
+                "-m",
+                "55",
+                "--output_path",
+                "/workspaces/TimeSFormer/frozen_evals_real"
+            ]
+        },
+        {
+            "name": "Gen41 Training half Step with 5 freezed layers",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "tools/run_net.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--cfg",
+                "/workspaces/TimeSFormer/configs/hslu41/TimeSformer_divST_8_224_gen4_half_step_freezed_05_simple_open.yaml"
+            ]
+        },
+        {
+            "name": "Gen41 Eval half Step with 5 freezed layers",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen_script_2.py",
+            "console": "integratedTerminal",
+            "args": [
+                "-cp",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_5_blocks_frozen_opening_val_4.668674698795181_epoch_00009.pyth",
+                "-t",
+                "5BlocksFrozen",
+                "-c",
+                "/workspaces/TimeSFormer/configs/hslu41/TimeSformer_divST_8_224_gen4_half_step_freezed_05_simple_open.yaml",
+                "-s",
+                "frame",
+                "-p",
+                "/workspaces/TimeSFormer/timesformer/datasets/hslu/gen4_1",
+                "-m",
+                "100",
+                "--output_path",
+                "/workspaces/TimeSFormer/gan4_1_eval",
+                "--dataset_class",
+                "gen4_1"
+            ]
+        },
+        {
+            "name": "Gen42 Training (only outside or open) half Step with 5 freezed layers",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "tools/run_net.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--cfg",
+                "/workspaces/TimeSFormer/configs/hslu41/TimeSformer_divST_8_224_gen4_half_step_freezed_05_simpler_open.yaml"
+            ]
+        },
+        {
+            "name": "Gen42 Eval half Step with 5 freezed layers",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen_script_2.py",
+            "console": "integratedTerminal",
+            "args": [
+                "-cp",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_5_blocks_frozen_2class_opening_val_0.0_epoch_00003.pyth",
+                "-t",
+                "5BlocksFrozen",
+                "-c",
+                "/workspaces/TimeSFormer/configs/hslu41/TimeSformer_divST_8_224_gen4_half_step_freezed_05_simpler_open.yaml",
+                "-s",
+                "frame",
+                "-p",
+                "/workspaces/TimeSFormer/timesformer/datasets/hslu/gen4_2",
+                "-m",
+                "100",
+                "--output_path",
+                "/workspaces/TimeSFormer/gan4_2_eval",
+                "--dataset_class",
+                "gen4_1"
+            ]
+        },
+        {
+            "name": "Gen43 Training (only none or open) half Step with 5 freezed layers",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "tools/run_net.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--cfg",
+                "/workspaces/TimeSFormer/configs/hslu41/TimeSformer_divST_8_224_gen43_half_step_freezed_05_simpler_open.yaml"
+            ]
+        },
+        {
+            "name": "Gen43${fileBasenameNoExtension} Eval half Step with 5 freezed layers",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen_script_2.py",
+            "console": "integratedTerminal",
+            "args": [
+                "-cp",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_5_blocks_frozen_2class_opening_val_0.0_epoch_00003.pyth",
+                "-t",
+                "5BlocksFrozen",
+                "-c",
+                "/workspaces/TimeSFormer/configs/hslu41/TimeSformer_divST_8_224_gen4_half_step_freezed_05_simpler_open.yaml",
+                "-s",
+                "frame",
+                "-p",
+                "/workspaces/TimeSFormer/timesformer/datasets/hslu/gen4_2",
+                "-m",
+                "100",
+                "--output_path",
+                "/workspaces/TimeSFormer/gan4_2_eval",
+                "--dataset_class",
+                "gen4_1"
+            ]
+        },
+        {
+            "name": "Gen431 Training (only none or open) half Step with 5 freezed layers",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "tools/run_net.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--cfg",
+                "/workspaces/TimeSFormer/configs/hslu41/TimeSformer_divST_8_224_gen43_half_step_freezed_05_simpler_open.yaml"
             ]
         },
     ]

@@ -38,18 +38,11 @@
 		"source=H:/data/dataset,target=/workspaces/TimeSFormer/timesformer/datasets/hslu/gen2r,type=bind,consistency=cached",
 		"source=H:/data/multiperson_dataset,target=/workspaces/TimeSFormer/timesformer/datasets/hslu/gen4,type=bind,consistency=cached",
 		"source=H:/k600,target=/workspaces/TimeSFormer/timesformer/datasets/k600,type=bind,consistency=cached",
-		"source=H:/data/Spread,target=/workspaces/TimeSFormer/timesformer/datasets/spread,type=bind,consistency=cached"
+		"source=H:/k600_human_only,target=/workspaces/TimeSFormer/timesformer/datasets/k600_human_only,type=bind,consistency=cached",
+		"source=H:/data/Spread,target=/workspaces/TimeSFormer/timesformer/datasets/spread,type=bind,consistency=cached",
+		"source=H:/data/gen4_11,target=/workspaces/TimeSFormer/timesformer/datasets/hslu/gen4_1,type=bind,consistency=cached",
+		"source=H:/data/gen4_21,target=/workspaces/TimeSFormer/timesformer/datasets/hslu/gen4_2,type=bind,consistency=cached",
+		"source=H:/data/gen4_3,target=/workspaces/TimeSFormer/timesformer/datasets/hslu/gen4_3,type=bind,consistency=cached",
+		"source=H:/data/gen4_3_1,target=/workspaces/TimeSFormer/timesformer/datasets/hslu/gen4_3_1,type=bind,consistency=cached"
 	]
-	// "forwardPorts": [
-	// 	6006,
-	// 	8008
-	// ],
-	// "portsAttributes": {
-	// 	"6006": {
-	// 		"visibility": "public"
-	// 	},
-	// 	"8008": {
-	// 		"visibility": "public"
-	// 	}
-	// }
 }

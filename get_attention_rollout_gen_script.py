@@ -101,10 +101,7 @@ def main(args):
     # Data Model Sampling
     # "REAL_ORIGINAL_UNIFORM",
     texts = [args.model_description]
-
     configs = [args.configs]
-
-
     output_dir = Path('/workspaces/TimeSFormer/final')
     output_dir.mkdir(parents=True, exist_ok=True)
 
