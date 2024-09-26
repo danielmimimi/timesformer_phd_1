@@ -1,0 +1,54 @@
+TRAIN:
+  ENABLE: True
+  DATASET: hslu
+  BATCH_SIZE: 16
+  EVAL_PERIOD: 3
+  CHECKPOINT_PERIOD: 3
+  AUTO_RESUME: False
+  CHECKPOINT_FILE_PATH: "/workspaces/TimeSFormer/Startpoints/TimeSformer_divST_8x32_224_K600.pyth"
+  FINETUNE: True
+  FREEZE_LAYERS: ["model.cls_token","model.pos_embed","model.time_embed","model.patch_embed","blocks.0.","blocks.1.","blocks.2.","blocks.3.","blocks.4.","blocks.5.","blocks.6.","blocks.7.","blocks.8."]
+  SPECIFIC_NAME: "9_blocks_frozen"
+DATA:
+  PATH_TO_DATA_DIR: "/workspaces/TimeSFormer/timesformer/datasets/hslu/gen2"
+  PATH_PREFIX: "/workspaces/TimeSFormer/timesformer/datasets/hslu/gen2"
+  SAMPLING_METHOD: "half_step"
+  NUM_FRAMES: 8
+  TRAIN_JITTER_SCALES: [256, 320]
+  TRAIN_CROP_SIZE: 224
+  TEST_CROP_SIZE: 224
+  INPUT_CHANNEL_NUM: [3]
+  INV_UNIFORM_SAMPLE: True
+  RANDOM_FLIP: False
+  REVERSE_INPUT_CHANNEL: True
+  MULTI_LABEL : False
+TIMESFORMER:
+  ATTENTION_TYPE: 'divided_space_time'
+SOLVER:
+  BASE_LR: 0.005
+  LR_POLICY: steps_with_relative_lrs
+  STEPS: [0, 200, 500,800]
+  LRS: [1, 0.8, 0.5,0.8]
+  MAX_EPOCH: 100
+  MOMENTUM: 0.9
+  WEIGHT_DECAY: 1e-4
+  OPTIMIZING_METHOD: sgd
+MODEL:
+  MODEL_NAME: vit_base_patch16_224
+  NUM_CLASSES: 5
+  ARCH: vit
+  LOSS_FUNC: cross_entropy
+  DROPOUT_RATE: 0.2
+TEST:
+  ENABLE: False
+  DATASET: hslu
+  BATCH_SIZE: 3
+  NUM_ENSEMBLE_VIEWS: 1
+  NUM_SPATIAL_CROPS: 1
+DATA_LOADER:
+  NUM_WORKERS: 8
+  PIN_MEMORY: True
+NUM_GPUS: 1
+NUM_SHARDS: 1
+RNG_SEED: 0
+OUTPUT_DIR: .
