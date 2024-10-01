@@ -413,12 +413,82 @@
         {
             "name": "Gen431 Training (only none or open) half Step with 5 freezed layers",
             "type": "debugpy",
-            "request": "launch",
             "program": "tools/run_net.py",
             "console": "integratedTerminal",
             "args": [
                 "--cfg",
                 "/workspaces/TimeSFormer/configs/hslu41/TimeSformer_divST_8_224_gen43_half_step_freezed_05_simpler_open.yaml"
+            ]
+        },
+        {
+            "name": "Gen431 Eval half Step with 4 freezed layers",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen_script_2.py",
+            "console": "integratedTerminal",
+            "args": [
+                "-cp",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_4_blocks_frozen_2class_opening_431_val_13.131313131313131_epoch_00075.pyth",
+                "-t",
+                "5BlocksFrozen",
+                "-c",
+                "/workspaces/TimeSFormer/configs/hslu41/TimeSformer_divST_8_224_gen43_half_step_freezed_05_simpler_open.yaml",
+                "-s",
+                "frame",
+                "-p",
+                "/workspaces/TimeSFormer/timesformer/datasets/hslu/gen4_3_1",
+                "-m",
+                "100",
+                "--output_path",
+                "/workspaces/TimeSFormer/gan4_3_1_eval",
+                "--dataset_class",
+                "gen4_1"
+            ]
+        },
+        {
+            "name": "Gen431 Eval half Step with 4 freezed layers eval with validation set",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "get_attention_rollout_gen_script_2.py",
+            "console": "integratedTerminal",
+            "args": [
+                "-cp",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_4_blocks_frozen_2class_opening_431_val_13.131313131313131_epoch_00075.pyth",
+                "-t",
+                "5BlocksFrozen",
+                "-c",
+                "/workspaces/TimeSFormer/configs/hslu41/TimeSformer_divST_8_224_gen43_half_step_freezed_05_simpler_open.yaml",
+                "-s",
+                "frame",
+                "-p",
+                "/workspaces/TimeSFormer/timesformer/datasets/hslu/gen4_3_1",
+                "-m",
+                "600",
+                "--output_path",
+                "/workspaces/TimeSFormer/gan4_3_1_eval_val",
+                "--dataset_class",
+                "gen4_1_v"
+            ]
+        },
+        {
+            "name": "Eval entire sequence ",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "evaluate_entire_sequences.py",
+            "console": "integratedTerminal",
+            "args": [
+                "-cp",
+                "/workspaces/TimeSFormer/checkpoints/checkpoint_4_blocks_frozen_2class_opening_431_val_13.131313131313131_epoch_00075.pyth",
+                "-t",
+                "5BlocksFrozen",
+                "-c",
+                "/workspaces/TimeSFormer/configs/hslu41/TimeSformer_divST_8_224_gen43_half_step_freezed_05_simpler_open.yaml",
+                "-s",
+                "frame",
+                "-p",
+                "/workspaces/TimeSFormer/timesformer/datasets/hslu/hslu_test/tests",
+                "--output_path",
+                "/workspaces/TimeSFormer/gan4_3_1_eval_val"
             ]
         },
     ]

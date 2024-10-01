@@ -141,6 +141,9 @@ def load_model(cfg,model_file):
         torch.manual_seed(cfg.RNG_SEED)
         model.eval()
     return model,device
+
+
+    
 def main(args):
 
     output_dir = Path(args.output_path)
@@ -159,6 +162,8 @@ def main(args):
         hslu_dataset = Hslu(cfg,mode="test")
     elif args.dataset_class == "gen4_1":
         hslu_dataset = Hslu41(cfg,mode="test")
+    elif args.dataset_class == "gen4_1_v":
+        hslu_dataset = Hslu41(cfg,mode="val")
     else:
         raise Exception("No Dataset found")
     

@@ -43,6 +43,7 @@
 		"source=H:/data/gen4_11,target=/workspaces/TimeSFormer/timesformer/datasets/hslu/gen4_1,type=bind,consistency=cached",
 		"source=H:/data/gen4_21,target=/workspaces/TimeSFormer/timesformer/datasets/hslu/gen4_2,type=bind,consistency=cached",
 		"source=H:/data/gen4_3,target=/workspaces/TimeSFormer/timesformer/datasets/hslu/gen4_3,type=bind,consistency=cached",
-		"source=H:/data/gen4_3_1,target=/workspaces/TimeSFormer/timesformer/datasets/hslu/gen4_3_1,type=bind,consistency=cached"
+		"source=H:/data/gen4_3_1,target=/workspaces/TimeSFormer/timesformer/datasets/hslu/gen4_3_1,type=bind,consistency=cached",
+		"source=H:/data/danielphd_images,target=/workspaces/TimeSFormer/timesformer/datasets/hslu/hslu_test,type=bind,consistency=cached"
 	]
 }

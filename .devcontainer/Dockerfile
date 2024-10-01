@@ -27,6 +27,9 @@ RUN pip install tensorboard
 RUN pip install torch-tb-profiler
 RUN pip install yacs
 
+# hslu handler
+RUN pip install csvkit
+
 # MAKE OPENCV RUNNABLE
 RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
 RUN  apt-get update \
